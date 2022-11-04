@@ -21,12 +21,31 @@ namespace FactoryPatternExercise2
             //Call the LoadData and SaveData methods of the IDataAccess variable
             //Run the program a few times using the different types.
 
-            Console.WriteLine("Do you want to use list, sql, or mongo database?");
-            var userInput = Console.ReadLine();  // var userInput = Console.ReadLine().ToLower()
-                                                 // but would store the response, in lower case, 
-                                                 // to the variable, if it's done in the IF ELSE or
-                                                 // the switch statement it wouldnt modify value stored
-                                                 // in variable
+            string userInput;
+            bool correctInput;
+
+            do 
+            {
+                Console.Clear();    // clears console
+                correctInput = true;
+                
+                Console.WriteLine("Do you want to use list, sql, or mongo database?");
+                
+                
+                userInput = Console.ReadLine();  // var userInput = Console.ReadLine().ToLower()
+                                                     // but would store the response, in lower case, 
+                                                     // to the variable, if it's done in the IF ELSE or
+                                                     // the switch statement it wouldnt modify value stored
+                                                     // in variable
+                if(userInput != "list" && userInput != "sql" && userInput != "mongo")   // doesnt && mean AND, meaning all
+                                                                                        // have to be true or false? isnt || or?
+                {
+                    correctInput = false;
+                    Console.WriteLine("Bad input!");
+                    Thread.Sleep(1000); // gives time before console is cleared
+                }
+                
+            } while (!correctInput);
 
             var userInputData = DataAccessFactory.GetDataAccessType(userInput);
 
